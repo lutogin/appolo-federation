@@ -1,0 +1,16 @@
+{
+  "name": "appolo-edge",
+  "main": "gateway.js",
+  "license": "ISC",
+  "scripts": {
+    "start-gateway": "nodemon app.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "@apollo/gateway": "^0.13.2",
+    "apollo-server": "^2.11.0",
+    "graphql": "^14.6.0"
+  }
+}

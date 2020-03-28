@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  appolo-edge:
+    build:
+      context: ./edge
+      dockerfile: Dockerfile
+    depends_on:
+      - appolo-api-manager
+    entrypoint: ["entrypoint.sh", "-s" ,"-t", "20", "appolo-api-manager:3001", "--"]
+    ports:
+    - "3000:3000"
+    environment:
+      - API_MANAGER_HOST=appolo-api-manager
+    restart: always
+
+  appolo-api-manager:
+    build:
+      context: ./api-manager
+      dockerfile: Dockerfile
+    depends_on:
+      - appolo-postgres
+    ports:
+      - "3001:3001"
+      - "3002:3002"
+      - "3003:3003"
+      - "3004:3004"
+    environment:
+      - DB_HOST=postgres
+      - DB_USER=dev
+      - DB_PASSWORD=1123
+      - DB_NAME=lemon
+
+  appolo-postgres:
+    image: postgres:12.0-alpine
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgresdb:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: 1123
+      POSTGRES_DB: lemon
+    restart: unless-stopped
+
+volumes:
+  postgresdb:

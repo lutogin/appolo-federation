@@ -1,0 +1,21 @@
+{
+  "name": "appolo-api-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/federation": "^0.13.2",
+    "apollo-server": "^2.11.0",
+    "concurrently": "^5.1.0",
+    "graphql": "^14.6.0",
+    "nodemon": "^2.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start-service-users": "nodemon users/index.js",
+    "start-service-reviews": "nodemon reviews/index.js",
+    "start-service-products": "nodemon products/index.js",
+    "start-services": "concurrently \"npm:start-service-*\""
+  }
+}
